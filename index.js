@@ -14,7 +14,8 @@ const PORT = process.env.PORT || 3000;
 
 connectToMongoDB();
 
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+// Configure CORS to allow requests from your frontend domain
+app.use(cors({ origin: "https://shimmering-kheer-8dc5c2.netlify.app/", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use("/", userRoute);

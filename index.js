@@ -9,6 +9,7 @@ import connectToMongoDB from "./database.config.js";
 dotenv.config();
 
 const app = express();
+const hostname = "0.0.0.0";
 const PORT = process.env.PORT || 3000;
 
 connectToMongoDB();
@@ -19,4 +20,4 @@ app.use(cookieParser());
 app.use("/", userRoute);
 app.use("/api", urlShortenerRoute);
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running at http://${hostname}:${PORT}`));

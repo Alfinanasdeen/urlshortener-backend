@@ -1,3 +1,40 @@
-node_modules
-.env.development
-.env.production
+# Dependency directories
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# Environment variables
+.env*
+
+# Build files
+build/
+dist/
+
+# Logs
+logs/
+*.log
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+lib-cov/
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# nyc test coverage
+.nyc_output/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm/
+
+# Optional eslint cache
+.eslintcache/
+
+# Ignore .vscode directory if using Visual Studio Code
+.vscode/

@@ -2,11 +2,11 @@
 node_modules/
 
 # Ignore log files
-*.log/
+*.log
 
 # Ignore .env files
-.env.development/
-.env.production/
+.env.development
+.env.production
 
 # Ignore package-lock.json file
-package-lock.json/
+package-lock.json

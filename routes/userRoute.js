@@ -8,7 +8,7 @@ import nodemailer from "nodemailer";
 const router = express.Router();
 const saltRounds = 10;
 const secretKey = process.env.JWT_SECRET;
-const frontendUrl = "http://localhost:5173";
+const frontendUrl = process.env.FRONTEND_URL;
 
 //Login
 router.post("/", async (req, res) => {

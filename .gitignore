@@ -3,9 +3,12 @@ node_modules/
 backend/node_modules/
 frontend/node_modules/
 
-# Environment variables
-.env.development
-.env.production
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # Build files
 build/

@@ -9,4 +9,4 @@ node_modules/
 .env.production
 
 # Ignore package-lock.json file
-package-lock.json
+package-lock.json/

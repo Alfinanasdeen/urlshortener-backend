@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const shortUrlSchema = new mongoose.Schema({
   full: {
@@ -17,5 +17,5 @@ const shortUrlSchema = new mongoose.Schema({
   },
 });
 
-const ShortUrl = mongoose.model('ShortUrl', shortUrlSchema);
+const ShortUrl = mongoose.model("ShortUrl", shortUrlSchema);
 export default ShortUrl;

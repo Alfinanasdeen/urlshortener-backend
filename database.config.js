@@ -1,4 +1,23 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+
+// Get the directory name of the current module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Determine which environment file to load
+const envPath =
+  process.env.NODE_ENV === "production"
+    ? ".env.production"
+    : ".env.development";
+
+// Load the environment variables from the correct file
+dotenv.config({ path: path.resolve(__dirname, envPath) });
+
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("FRONTEND_URL:", process.env.FRONTEND_URL);
 
 function connectToMongoDB() {
   const DATABASE_URI =
@@ -10,7 +29,7 @@ function connectToMongoDB() {
     .then((response) => {
       console.log("Database connection successful");
     })
-    .catch((error) => console.log(error));
+    .catch((error) => console.log("Database connection error:", error));
 }
 
 export default connectToMongoDB;

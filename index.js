@@ -1,12 +1,12 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import dotenv from "dotenv";
-import userRoute from "./routes/userRoute.js";
-import urlShortenerRoute from "./routes/urlShortenerRoute.js";
+import userRoute from "./userRoute.js";
+import urlShortenerRoute from "./urlShortenerRoute.js";
 import connectToMongoDB from "./database.config.js";
-
-dotenv.config();
 
 const app = express();
 const hostname = "0.0.0.0";
@@ -14,11 +14,13 @@ const PORT = process.env.PORT || 3000;
 
 connectToMongoDB();
 
-// Configure CORS to allow requests from your frontend domain
-app.use(cors({origin: process.env.FRONTEND_URL, credentials: true }));
+app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
-app.use("/", userRoute);
+
+app.use("/api", userRoute);
 app.use("/api", urlShortenerRoute);
 
-app.listen(PORT, () => console.log(`Server running at http://${hostname}:${PORT}`));
+app.listen(PORT, () =>
+  console.log(`Server running at http://${hostname}:${PORT}`)
+);

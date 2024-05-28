@@ -1,14 +1,12 @@
 import dotenv from "dotenv";
-dotenv.config();
-
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import userRoute from "./userRoute.js";
 import urlShortenerRoute from "./urlShortenerRoute.js";
 import connectToMongoDB from "./database.config.js";
-import { fileURLToPath } from 'url';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 // Determine which environment file to load
 const __filename = fileURLToPath(import.meta.url);
@@ -17,31 +15,29 @@ const envPath = process.env.NODE_ENV === 'production' ? '.env.production' : '.en
 dotenv.config({ path: path.resolve(__dirname, envPath) });
 
 const app = express();
-const hostname = "0.0.0.0";
 const PORT = process.env.PORT || 3000;
 
 connectToMongoDB();
 
 // CORS configuration
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      console.log("Origin:", origin);
-      if (origin === process.env.FRONTEND_URL || !origin) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: process.env.FRONTEND_URL || "*",
+  credentials: true,
+}));
+
 app.use(express.json());
 app.use(cookieParser());
 
+// Routes
 app.use("/api", userRoute);
 app.use("/api", urlShortenerRoute);
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: "Something went wrong!" });
+});
+
 app.listen(PORT, () =>
-  console.log(`Server running at http://${hostname}:${PORT}`)
+  console.log(`Server running on port ${PORT}`)
 );

@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3000;
 connectToMongoDB();
 
 
-app.use(cors({origin: process.env.FRONTEND_URL, credentials: true }));
+app.use(cors({origin: "*", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 

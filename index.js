@@ -26,16 +26,10 @@ const PORT = process.env.PORT || 3000;
 connectToMongoDB();
 
 // CORS configuration
+const allowedOrigins = [process.env.FRONTEND_URL, undefined]; 
 app.use(
   cors({
-    origin: (origin, callback) => {
-      console.log("Origin:", origin);
-      if (origin === process.env.FRONTEND_URL || !origin) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: allowedOrigins,
     credentials: true,
   })
 );

@@ -7,6 +7,14 @@ import cookieParser from "cookie-parser";
 import userRoute from "./userRoute.js";
 import urlShortenerRoute from "./urlShortenerRoute.js";
 import connectToMongoDB from "./database.config.js";
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+// Determine which environment file to load
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const envPath = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
+dotenv.config({ path: path.resolve(__dirname, envPath) });
 
 const app = express();
 const hostname = "0.0.0.0";
